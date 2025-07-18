@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Registro Mercantil</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    h2 { text-align: center; }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px;
+      margin-top: 20px;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  </style>
+<style type="text/css">
+.grande { font-size: 60px; }
+</style>
+<script>
+// Escribir aqui el código Javascript
+</script>
+</head>
+<body>
+  <h2>Calculadora de Registro Mercantil</h2>
+  <label for="activos">Valor de los Activos (COP):</label>
+  <input type="number" id="activos" placeholder="Ej. 6757919995">
+  <button onclick="calcularRegistro()">Calcular Valor de Registro</button>
+  <div id="resultado">Valor estimado del registro mercantil: $306.128 COP</div>
+
+  <script>
+    function calcularRegistro() {
+      const activos = parseFloat(document.getElementById('activos').value);
+      let valor = 0;
+
+      if (isNaN(activos) || activos <= 0) {
+        document.getElementById('resultado').innerText = 'Por favor ingresa un valor válido.';
+        return;
+      }
+
+      if (activos <= 75088000) {
+        valor = 23104 + (8086.4 * activos / 1000000);
+      } else if (activos <= 288800000) {
+        valor = 548720 + (4043.2 * (activos - 75088000) / 1000000);
+      } else if (activos <= 750880000) {
+        valor = 1296712 + (1155.2 * (activos - 288800000) / 1000000);
+      } else if (activos <= 7500088000) {
+        valor = 1758792 + (519.84 * (activos - 750880000) / 1000000);
+      } else if (activos <= 23104000000) {
+        valor = 4799856 + (288.8 * (activos - 7500088000) / 1000000);
+      } else {
+        valor = 8698656 + (144.4 * (activos - 23104000000) / 1000000);
+        if (valor > 11552000) valor = 11552000;
+      }
+
+      document.getElementById('resultado').innerText = `Valor estimado del registro mercantil: $${valor.toLocaleString('es-CO', {minimumFractionDigits: 0})} COP`;
+    }
+  </script>
+
+
+
+</body></html>
